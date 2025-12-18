@@ -15,4 +15,9 @@ def get_fuel_data():
     if df.empty:
         return None
 
-    return df
+    # Rename column for consistency
+    if "Retail Price" in df.columns:
+        df.rename(columns={"Retail Price": "price"}, inplace=True)
+
+    # Return list of dictionaries instead of DataFrame
+    return df.to_dict("records")
